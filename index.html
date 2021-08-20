@@ -24,7 +24,7 @@
 <body>
   <div id="app">
     <div style="display: flex; justify-content: center; flex-direction: column;">
-      <img-card v-for="i in 3" style="margin: 16px;" src="./images/metro-1853976_1920.jpg" border="4%">
+      <img-card v-for="i in 3" style="margin: 16px;" src="./images/metro-1853976_1920.jpg" padding="4%">
         <div style="
           position: absolute; right: 0; bottom: 0; color: white; text-shadow: 0px 0px 5px black;
           text-align: end; font-size: 1em; text-shadow: 1px 2px 3px #808080; line-height: 1.5em;
@@ -70,10 +70,10 @@
           <img :src="src" :style="`
             height: 100%; width: 100%;
             clip-path: polygon(
-              ${border}              ${border},
-              calc(100% - ${border}) ${border},
-              calc(100% - ${border}) calc(100% - ${border}),
-              ${border}              calc(100% - ${border})
+              ${padding}              ${padding},
+              calc(100% - ${padding}) ${padding},
+              calc(100% - ${padding}) calc(100% - ${padding}),
+              ${padding}              calc(100% - ${padding})
             );
           `" />
         </div>
@@ -83,7 +83,7 @@
           display: flex; justify-content: center; align-items: center;
         ">
           <img :src="src" :style="`
-            height: calc(100% - (${border} * 2)); width: calc(100% - (${border} * 2));
+            height: calc(100% - (${padding} * 2)); width: calc(100% - (${padding} * 2));
           `" />
         </div>
 
@@ -94,7 +94,7 @@
 
           <div :style="`
             position: relative; overflow: hidden; border: solid 4px white;
-            width: calc(100% - (${border} * 2)); height: calc(100% - (${border} * 2));
+            width: calc(100% - (${padding} * 2)); height: calc(100% - (${padding} * 2));
             box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.2), 0px 0px 10px 6px rgba(0, 0, 0, 0.2) inset;
           `">
             <slot></slot>
@@ -114,7 +114,7 @@
           required: true,
         },
 
-        border: {
+        padding: {
           type: String,
           default: "4%",
         },
