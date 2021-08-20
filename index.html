@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <title>Document</title>
+
+  <style>
+    img {
+      vertical-align: top;
+    }
+
+    a:visited {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div style="display: flex; justify-content: center; flex-direction: column;">
+      <img-card v-for="i in 3" style="margin: 16px;">
+      </img-card>
+    </div>
+  </div>
+
+  <script>
+    const app = Vue.createApp({})
+  </script>
+
+
+  <template id="img-card">
+    <div :style="`display: ${this.isLoaded ? 'block' : 'none'}; text-align: center;`">
+      <div style="display: inline-block; position: relative;">
+        <div style="overflow: hidden;">
+          <img :src="src" @load="isLoaded = true" style="
+            max-height: 600px; filter: blur(3px); margin: -3px;
+          " />
+        </div>
+
+        <div v-if="isClicp" style="
+          position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+        ">
+          <img :src="src" :style="`
+            height: 100%; width: 100%;
+            clip-path: polygon(
+              ${border}              ${border},
+              calc(100% - ${border}) ${border},
+              calc(100% - ${border}) calc(100% - ${border}),
+              ${border}              calc(100% - ${border})
+            );
+          `" />
+        </div>
+
+        <div v-if="!isClicp" style="
+          position: absolute; left: 0; top: 0; width: 100%; height: 100%; 
+          display: flex; justify-content: center; align-items: center;
+        ">
+          <img :src="src" :style="`
+            height: calc(100% - (${border} * 2)); width: calc(100% - (${border} * 2));
+          `" />
+        </div>
+
+        <div style="
+          position: absolute; left: 0; top: 0; width: 100%; height: 100%; 
+          display: flex; justify-content: center; align-items: center;
+        ">
+
+          <div :style="`
+            position: relative; width: calc(100% - (${border} * 2)); height: calc(100% - (${border} * 2));
+            box-shadow: 0px 0px 10px 6px rgba(0, 0, 0, 0.2), 0px 0px 10px 6px rgba(0, 0, 0, 0.2) inset;
+            border: solid 4px white;
+          `">
+
+            <div style="
+              position: absolute; right: 0; bottom: 0; color: white; text-shadow: 0px 0px 5px black;
+              text-align: end; font-size: 1em; text-shadow: 1px 2px 3px #808080; line-height: 1.5em;
+            ">
+              <div style="display: inline-block; text-align: start;">
+                <a href="https://pixabay.com/photos/metro-platform-public-transport-1853976/">
+                  https://pixabay.com/photos/ <br>
+                  metro-platform-public-transport-1853976/
+                </a>
+              </div>
+            </div>
+
+            <div style="
+              position: absolute; right: 0; top: 0; color: black; text-shadow: 0px 0px 3px white;
+              font-size: 3em;  font-weight: bold; font-family: serif; writing-mode: vertical-rl; text-align: start;
+            ">
+              W8 Street Station
+              <span style="font-size: 0.7em; line-height: 0.4em; display: block; margin-top: 3em;">
+                in New York Metoro
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    app.component('img-card', {
+      template: document.getElementById("img-card").innerHTML,
+
+      data() {
+        return {
+          isLoaded: false,
+          isClicp: false,
+          border: "4%",
+          src: "./images/metro-1853976_1920.jpg"
+        }
+      },
+
+      computed: {
+        style() {
+          return `
+            display: ${this.isLoaded ? "block" : "none"};
+            text-align: center;
+          `
+        }
+      }
+    })
+  </script>
+
+  <script>
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
