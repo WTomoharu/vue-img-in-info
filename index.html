@@ -24,7 +24,7 @@
 <body>
   <div id="app">
     <div style="display: flex; justify-content: center; flex-direction: column;">
-      <img-card v-for="i in 3" style="margin: 16px;">
+      <img-card v-for="i in 3" style="margin: 16px;" src="./images/metro-1853976_1920.jpg" border="4%">
         <div style="
           position: absolute; right: 0; bottom: 0; color: white; text-shadow: 0px 0px 5px black;
           text-align: end; font-size: 1em; text-shadow: 1px 2px 3px #808080; line-height: 1.5em;
@@ -108,12 +108,26 @@
     app.component('img-card', {
       template: document.getElementById("img-card").innerHTML,
 
+      props: {
+        src: {
+          type: String,
+          required: true,
+        },
+
+        border: {
+          type: String,
+          default: "4%",
+        },
+
+        isClicp: {
+          type: Boolean,
+          default: false
+        }
+      },
+
       data() {
         return {
           isLoaded: false,
-          isClicp: false,
-          border: "4%",
-          src: "./images/metro-1853976_1920.jpg"
         }
       },
 
